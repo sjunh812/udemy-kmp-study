@@ -1,6 +1,6 @@
-package com.sjhstudio.dailypulse.articles
+package com.sjhstudio.dailypulse.shared.articles
 
-import com.sjhstudio.dailypulse.BaseViewModel
+import com.sjhstudio.dailypulse.shared.BaseViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

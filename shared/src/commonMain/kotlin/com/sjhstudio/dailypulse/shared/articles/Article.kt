@@ -1,4 +1,4 @@
-package com.sjhstudio.dailypulse.articles
+package com.sjhstudio.dailypulse.shared.articles
 
 data class Article(
     val title: String,

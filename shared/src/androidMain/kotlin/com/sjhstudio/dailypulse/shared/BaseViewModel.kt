@@ -1,4 +1,4 @@
-package com.sjhstudio.dailypulse
+package com.sjhstudio.dailypulse.shared
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

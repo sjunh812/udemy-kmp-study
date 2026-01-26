@@ -1,7 +1,6 @@
 package com.sjhstudio.dailypulse
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -63,7 +62,7 @@ private fun RowView(title: String, subtitle: String) {
 }
 
 private fun makeItems(): List<Pair<String, String>> {
-    val platform = Platform()
+    val platform = com.sjhstudio.dailypulse.shared.Platform()
     platform.logSystemInfo()
 
     return listOf(

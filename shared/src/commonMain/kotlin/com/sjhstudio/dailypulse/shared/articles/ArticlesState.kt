@@ -1,4 +1,4 @@
-package com.sjhstudio.dailypulse.articles
+package com.sjhstudio.dailypulse.shared.articles
 
 sealed interface ArticlesState {
     data object Loading : ArticlesState
