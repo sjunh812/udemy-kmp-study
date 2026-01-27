@@ -70,7 +70,7 @@ fun AppBar(
 private fun ArticlesListView(articles: List<Article>) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(items = articles) {
-
+            ArticleItemView(article = it)
         }
     }
 }

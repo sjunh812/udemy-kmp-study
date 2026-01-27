@@ -60,11 +60,10 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                // Add KMP dependencies here
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.androidx.lifecycle.viewmodelCompose)
                 implementation(libs.androidx.lifecycle.runtimeCompose)
-                implementation(libs.androidx.lifecycle.viewmodel)
-                // Add KMP dependencies here
             }
         }
 
