@@ -69,17 +69,20 @@ struct ArticleItemView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            AsyncImage(url: URL(string: article.imageUrl)) { pharse in
-                if pharse.image != nil {
-                    pharse.image!
+//            let encodedUrlString = article.imageUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? article.imageUrl
+            AsyncImage(url: URL(string: article.imageUrl)) { phase in
+                if phase.image != nil {
+                    phase.image!
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                } else if pharse.error != nil {
+                } else if phase.error != nil {
                     Text("Image Load Error")
                 } else {
                     ProgressView()
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .aspectRatio(16/9, contentMode: .fit)
                 }
-            }
+            }.frame(minHeight: 200)
             Text(article.title)
                 .font(.title)
                 .fontWeight(.bold)
@@ -87,7 +90,8 @@ struct ArticleItemView: View {
             Text(article.date)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .foregroundStyle(.gray)
-        }.padding(16)
+        }
+        .padding(16)
     }
 }
 
