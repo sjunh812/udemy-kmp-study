@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,19 +32,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.sjhstudio.dailypulse.shared.articles.Article
-import com.sjhstudio.dailypulse.shared.articles.ArticlesState
+import com.sjhstudio.dailypulse.shared.articles.ArticlesType
 import com.sjhstudio.dailypulse.shared.articles.ArticlesViewModel
 
 @Composable
 fun ArticlesScreen(viewModel: ArticlesViewModel) {
-    val articlesState = viewModel.articlesState.collectAsState()
+    val state by viewModel.articlesState.collectAsState()
 
     Column {
         AppBar(onAboutButtonClick = {})
-        when (val state = articlesState.value) {
-            is ArticlesState.Error -> ErrorMessage(message = state.error)
-            ArticlesState.Loading -> Loader()
-            is ArticlesState.Success -> ArticlesListView(articles = state.list)
+        when (state.type) {
+            ArticlesType.Error -> ErrorMessage(message = state.error)
+            ArticlesType.Loading -> Loader()
+            ArticlesType.Success -> ArticlesListView(articles = state.articles)
         }
     }
 }

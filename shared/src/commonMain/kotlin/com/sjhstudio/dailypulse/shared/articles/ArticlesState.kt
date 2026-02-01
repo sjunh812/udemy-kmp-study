@@ -1,7 +1,11 @@
 package com.sjhstudio.dailypulse.shared.articles
 
-sealed interface ArticlesState {
-    data object Loading : ArticlesState
-    data class Success(val list: List<Article>) : ArticlesState
-    data class Error(val error: String) : ArticlesState
+data class ArticlesState(
+    val type: ArticlesType,
+    val articles: List<Article> = emptyList(),
+    val error: String = "",
+)
+
+enum class ArticlesType {
+    Loading, Success, Error
 }

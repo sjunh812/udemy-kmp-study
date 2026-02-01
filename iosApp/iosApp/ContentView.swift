@@ -1,6 +1,6 @@
 import UIKit
 import SwiftUI
-import ComposeApp
+import shared
 
 //struct ComposeView: UIViewControllerRepresentable {
 //    func makeUIViewController(context: Context) -> UIViewController {
@@ -12,7 +12,7 @@ import ComposeApp
 
 struct ContentView: View {
     var body: some View {
-       AboutScreen()
+        ArticlesScreen(viewModel: .init())
     }
 }
 
