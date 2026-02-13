@@ -18,7 +18,7 @@ internal class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            ArticlesScreen(viewModel = viewModel)
+            AppNav(viewModel = viewModel)
         }
     }
 }

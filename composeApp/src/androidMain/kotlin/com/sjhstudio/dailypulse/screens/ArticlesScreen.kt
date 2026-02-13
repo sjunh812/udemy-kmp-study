@@ -1,5 +1,6 @@
-package com.sjhstudio.dailypulse
+package com.sjhstudio.dailypulse.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -36,11 +37,18 @@ import com.sjhstudio.dailypulse.shared.articles.ArticlesType
 import com.sjhstudio.dailypulse.shared.articles.ArticlesViewModel
 
 @Composable
-fun ArticlesScreen(viewModel: ArticlesViewModel) {
+fun ArticlesScreen(
+    viewModel: ArticlesViewModel,
+    onAboutButtonClick: () -> Unit,
+) {
     val state by viewModel.articlesState.collectAsState()
 
-    Column {
-        AppBar(onAboutButtonClick = {})
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        AppBar(onAboutButtonClick = onAboutButtonClick)
         when (state.type) {
             ArticlesType.Error -> ErrorMessage(message = state.error)
             ArticlesType.Loading -> Loader()

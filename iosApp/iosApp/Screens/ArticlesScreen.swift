@@ -9,20 +9,23 @@ import SwiftUI
 import shared
 
 extension ArticlesScreen {
+    
     @MainActor
-    class ArticlesViewModelWrapper : ObservableObject {
+    class ArticlesViewModelWrapper: ObservableObject {
         let articlesViewModel: ArticlesViewModel
-        @Published var articlesState: ArticlesState
+        
         
         init() {
             articlesViewModel = ArticlesViewModel()
             articlesState = articlesViewModel.articlesState.value
         }
         
+        @Published var articlesState: ArticlesState
+        
         func startObserving() {
             Task {
-                for await article in articlesViewModel.articlesState {
-                    self.articlesState = article
+                for await articlesS in articlesViewModel.articlesState {
+                    self.articlesState = articlesS
                 }
             }
         }
@@ -30,6 +33,7 @@ extension ArticlesScreen {
 }
 
 struct ArticlesScreen: View {
+    
     @ObservedObject private(set) var viewModel: ArticlesViewModelWrapper
     
     var body: some View {
@@ -57,10 +61,9 @@ struct ArticlesScreen: View {
 
 struct AppBar: View {
     var body: some View {
-        Text("Artcles")
+        Text("Articles")
             .font(.largeTitle)
             .fontWeight(.bold)
-        
     }
 }
 
@@ -69,7 +72,6 @@ struct ArticleItemView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-//            let encodedUrlString = article.imageUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? article.imageUrl
             AsyncImage(url: URL(string: article.imageUrl)) { phase in
                 if phase.image != nil {
                     phase.image!
@@ -79,17 +81,13 @@ struct ArticleItemView: View {
                     Text("Image Load Error")
                 } else {
                     ProgressView()
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .aspectRatio(16/9, contentMode: .fit)
                 }
-            }.frame(minHeight: 200)
+            }
             Text(article.title)
                 .font(.title)
                 .fontWeight(.bold)
             Text(article.description_)
-            Text(article.date)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .foregroundStyle(.gray)
+            Text(article.date).frame(maxWidth: .infinity, alignment: .trailing).foregroundStyle(.gray)
         }
         .padding(16)
     }
@@ -109,7 +107,3 @@ struct ErrorMessage: View {
             .font(.title)
     }
 }
-
-//#Preview {
-//    ArticlesScreen()
-//}
