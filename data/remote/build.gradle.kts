@@ -1,7 +1,11 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.androidLint)
+    alias(libs.plugins.buildKonfig)
 }
 
 kotlin {
@@ -97,5 +101,23 @@ kotlin {
             }
         }
     }
+}
 
+val localProperties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        file.inputStream().use(::load)
+    }
+}
+
+val baseUrl = localProperties.getProperty("BASE_URL")
+val apiKey = localProperties.getProperty("API_KEY")
+
+buildkonfig {
+    packageName = "com.sjhstudio.data.remote"
+
+    defaultConfigs {
+        buildConfigField(STRING, "BASE_URL", baseUrl)
+        buildConfigField(STRING, "API_KEY", apiKey)
+    }
 }
